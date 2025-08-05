@@ -141,6 +141,7 @@ const SignupForm = ({ onSwitchToLogin }) => {
     try {
       const res = await fetch(`${API_BASE}/signup`, {
         method: 'POST',
+        credentials: "include", 
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       });
@@ -326,6 +327,7 @@ const LoginForm = ({ onSwitchToSignup }) => {
     try {
       const res = await fetch(`${API_BASE}/login`, {
         method: 'POST',
+        credentials: "include", 
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       });
