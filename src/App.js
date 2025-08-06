@@ -425,9 +425,7 @@ const ForgotPasswordModal = ({ isOpen, onClose }) => {
   const [loading, setLoading] = useState(false);
   const [toast, setToast] = useState(null);
   
-  const sendOtp = async (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const sendOtp = async () => {
     setLoading(true);
     
     try {
@@ -452,9 +450,7 @@ const ForgotPasswordModal = ({ isOpen, onClose }) => {
     setLoading(false);
   };
   
-  const resetPassword = async (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const resetPassword = async () => {
     setLoading(true);
     
     try {
@@ -488,7 +484,7 @@ const ForgotPasswordModal = ({ isOpen, onClose }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Reset Password">
       {step === 1 && (
-        <form onSubmit={sendOtp} className="space-y-4">
+        <div className="space-y-4">
           <p className="text-gray-600 mb-4">Enter your email to receive a reset code</p>
           <Input
             icon={Mail}
@@ -496,16 +492,17 @@ const ForgotPasswordModal = ({ isOpen, onClose }) => {
             placeholder="Email Address"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            onKeyPress={(e) => e.key === 'Enter' && sendOtp()}
             required
           />
-          <Button type="submit" className="w-full" disabled={loading}>
+          <Button onClick={sendOtp} className="w-full" disabled={loading}>
             {loading ? 'Sending...' : 'Send Reset Code'}
           </Button>
-        </form>
+        </div>
       )}
       
       {step === 2 && (
-        <form onSubmit={resetPassword} className="space-y-4">
+        <div className="space-y-4">
           <p className="text-gray-600 mb-4">Enter the code sent to {email} and your new password</p>
           <Input
             icon={Mail}
@@ -522,22 +519,20 @@ const ForgotPasswordModal = ({ isOpen, onClose }) => {
             placeholder="New Password"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
+            onKeyPress={(e) => e.key === 'Enter' && resetPassword()}
             required
           />
-          <Button type="submit" className="w-full" disabled={loading}>
+          <Button onClick={resetPassword} className="w-full" disabled={loading}>
             {loading ? 'Resetting...' : 'Reset Password'}
           </Button>
           <button
             type="button"
-            onClick={(e) => {
-              e.preventDefault();
-              setStep(1);
-            }}
+            onClick={() => setStep(1)}
             className="w-full text-blue-600 hover:underline text-sm"
           >
             Back
           </button>
-        </form>
+        </div>
       )}
       
       {toast && <Toast {...toast} onClose={() => setToast(null)} />}
