@@ -427,6 +427,7 @@ const ForgotPasswordModal = ({ isOpen, onClose }) => {
   
   const sendOtp = async (e) => {
     e.preventDefault();
+    e.stopPropagation();
     setLoading(true);
     
     try {
@@ -453,6 +454,7 @@ const ForgotPasswordModal = ({ isOpen, onClose }) => {
   
   const resetPassword = async (e) => {
     e.preventDefault();
+    e.stopPropagation();
     setLoading(true);
     
     try {
@@ -527,7 +529,10 @@ const ForgotPasswordModal = ({ isOpen, onClose }) => {
           </Button>
           <button
             type="button"
-            onClick={() => setStep(1)}
+            onClick={(e) => {
+              e.preventDefault();
+              setStep(1);
+            }}
             className="w-full text-blue-600 hover:underline text-sm"
           >
             Back
@@ -539,7 +544,6 @@ const ForgotPasswordModal = ({ isOpen, onClose }) => {
     </Modal>
   );
 };
-
 // Main App Components
 const Header = () => {
   const { user, logout } = useAuth();
