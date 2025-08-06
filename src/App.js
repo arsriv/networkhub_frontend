@@ -496,7 +496,7 @@ const ForgotPasswordModal = ({ isOpen, onClose }) => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <Button type="submit" className="w-full" disabled={loading}>
+          <Button type="button" className="w-full" disabled={loading}>
             {loading ? 'Sending...' : 'Send Reset Code'}
           </Button>
         </form>
