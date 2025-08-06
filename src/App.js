@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { User, Mail, Lock, Eye, EyeOff, Camera, Search, Heart, MessageCircle, UserPlus, UserMinus, Edit3, MapPin, Calendar, Send, Image as ImageIcon } from 'lucide-react';
 
-const API_BASE = 'https://web-production-6d7eb.up.railway.app/'|| "http://localhost:5000";
+const API_BASE = "https://localhost:5000";
 // Auth Context
 const AuthContext = React.createContext();
 
