@@ -12,7 +12,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     if (token) {
       // Verify token and get user data
-      fetch(`${API_BASE}/profile`, {
+      fetch(`${API_BASE}/api/profile`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(res => res.json())
@@ -139,7 +139,7 @@ const SignupForm = ({ onSwitchToLogin }) => {
     setLoading(true);
     
     try {
-      const res = await fetch(`${API_BASE}/signup`, {
+      const res = await fetch(`${API_BASE}/api/signup`, {
         method: 'POST',
         credentials: "include", 
         headers: { 'Content-Type': 'application/json' },
@@ -166,7 +166,7 @@ const SignupForm = ({ onSwitchToLogin }) => {
     setLoading(true);
     
     try {
-      const res = await fetch(`${API_BASE}/verify-otp`, {
+      const res = await fetch(`${API_BASE}/api/verify-otp`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: formData.email, otp })
@@ -325,7 +325,7 @@ const LoginForm = ({ onSwitchToSignup }) => {
     setLoading(true);
     
     try {
-      const res = await fetch(`${API_BASE}/login`, {
+      const res = await fetch(`${API_BASE}/api/login`, {
         method: 'POST',
         credentials: "include", 
         headers: { 'Content-Type': 'application/json' },
@@ -430,7 +430,7 @@ const ForgotPasswordModal = ({ isOpen, onClose }) => {
     setLoading(true);
     
     try {
-      const res = await fetch(`${API_BASE}/forgot-password`, {
+      const res = await fetch(`${API_BASE}/api/forgot-password`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email })
@@ -456,7 +456,7 @@ const ForgotPasswordModal = ({ isOpen, onClose }) => {
     setLoading(true);
     
     try {
-      const res = await fetch(`${API_BASE}/reset-password`, {
+      const res = await fetch(`${API_BASE}/api/reset-password`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, otp, newPassword })
@@ -626,7 +626,7 @@ const CreatePost = ({ onPostCreated }) => {
     setLoading(true);
     
     try {
-      const res = await fetch(`${API_BASE}/posts`, {
+      const res = await fetch(`${API_BASE}/api/posts`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -780,7 +780,7 @@ const Feed = () => {
   
   const fetchPosts = async () => {
     try {
-      const res = await fetch(`${API_BASE}/posts`, {
+      const res = await fetch(`${API_BASE}/api/posts`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       
@@ -845,7 +845,7 @@ const UserSearch = () => {
     setLoading(true);
     
     try {
-      const res = await fetch(`${API_BASE}/users/search?q=${encodeURIComponent(searchQuery)}`, {
+      const res = await fetch(`${API_BASE}/api/users/search?q=${encodeURIComponent(searchQuery)}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       
@@ -866,7 +866,7 @@ const UserSearch = () => {
   const handleFollow = async (userId, isFollowing) => {
     try {
       const endpoint = isFollowing ? 'unfollow' : 'follow';
-      const res = await fetch(`${API_BASE}/${endpoint}/${userId}`, {
+      const res = await fetch(`${API_BASE}/api/${endpoint}/${userId}`, {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -988,7 +988,7 @@ const Profile = () => {
     formData.append('image', file);
     
     try {
-      const res = await fetch(`${API_BASE}/upload-profile-image`, {
+      const res = await fetch(`${API_BASE}/api/upload-profile-image`, {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
         body: formData
@@ -1012,7 +1012,7 @@ const Profile = () => {
     setLoading(true);
     
     try {
-      const res = await fetch(`${API_BASE}/profile`, {
+      const res = await fetch(`${API_BASE}/api/profile`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
